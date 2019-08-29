@@ -1,0 +1,23 @@
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    container_name: db
+
+  server:
+    container_name: server
+    build: ./rank-redis/
+    volumes:
+      - './rank-redis:/usr/src/app'
+      - './rank-redis/package.json:/usr/src/app/package.json'
+    ports:
+      - '8080:8080'
+
+  client:
+    container_name: reactclient
+    build: ./rank-redis-web/
+    volumes:
+      - './rank-redis-web:/usr/src/app/'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3000:3000'
