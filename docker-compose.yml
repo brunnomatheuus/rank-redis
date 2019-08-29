@@ -10,6 +10,7 @@ services:
     volumes:
       - './rank-redis:/usr/src/app'
       - './rank-redis/package.json:/usr/src/app/package.json'
+      - '/usr/src/app/node_modules'
     ports:
       - '8080:8080'
 
